@@ -7,25 +7,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::middleware('check.role:admin')->prefix('admin')->group(function () {
         Route::get('/dashboard', [EventController::class, 'view'])->name('admin.dashboard');
         Route::get('/dashboard/create', [EventController::class, 'create'])->name('admin.create');
         Route::post('/dashboard/store', [EventController::class, 'store'])->name('admin.store');
-        Route::put('/dashboard/events/{id}', [EventController::class, 'update'])->name('admin.edit');
+        Route::get('/dashboard/events/{id}/edit', [EventController::class, 'edit'])->name('admin.edit');
+        Route::put('/dashboard/events/{id}', [EventController::class, 'update'])->name('admin.update');
         Route::delete('/dashboard/events/{id}',[EventController::class, 'delete'])->name('admin.delete');
     });
 
     Route::middleware('check.role:user')->group(function () {
-        Route::get('/dashboard', [EventController::class, 'dashboard'])->name('user.dashboard');
-        Route::get('/dashboard/create', [EventController::class, 'create'])->name('user.create');
-        Route::post('/dashboard/store', [EventController::class, 'store'])->name('user.store');
+        Route::get('/dashboard', [EventController::class, 'userDashboard'])->name('user.dashboard');
+        Route::get('/dashboard/create', [EventController::class, 'userCreate'])->name('user.create');
+        Route::post('/dashboard/store', [EventController::class, 'userStore'])->name('user.store');
     });
 
-
-
-
-// });
+});
 
 // Route::middleware([
 //     'auth:sanctum',
