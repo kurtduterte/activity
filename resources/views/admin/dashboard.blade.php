@@ -1,59 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 text-gray-800">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Admin Dashboard - Manage Events
+        </h2>
+    </x-slot>
 
-    <div class="max-w-4xl mx-auto py-10">
-        <h1 class="text-3xl font-bold mb-6">Events</h1>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <!-- Success/Error Messages -->
+            @if (session('success'))
+                <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-        <a href="{{ route('admin.create') }}" class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white rounded">
-            Add Event
-        </a>
+            @if (session('error'))
+                <div class="mb-6 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
+                    {{ session('error') }}
+                </div>
+            @endif
 
-        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow">
-            <thead>
-                <tr class="bg-gray-200 text-left">
-                    <th class="py-3 px-4 border-b">Title</th>
-                    <th class="py-3 px-4 border-b">Description</th>
-                    <th class="py-3 px-4 border-b">Location</th>
-                    <th class="py-3 px-4 border-b">Date</th>
-                    <th class="py-3 px-4 border-b">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($events as $event)
-                    <tr class="hover:bg-gray-100">
-                        <td class="py-3 px-4 border-b">{{ $event->title }}</td>
-                        <td class="py-3 px-4 border-b">{{ $event->description }}</td>
-                        <td class="py-3 px-4 border-b">{{ $event->location }}</td>
-                        <td class="py-3 px-4 border-b">{{ $event->date }}</td>
-                        <td class="py-3 px-4 border-b flex gap-2">
-                            <a href="{{ route('admin.edit', $event->id) }}"
-                               class="px-3 py-1 bg-yellow-500 text-white rounded">
-                                Edit
+            <!-- Header with Create Button -->
+            <div class="mb-6 bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="p-6 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900">Event Management</h3>
+                        <p class="text-gray-600">Manage all campus events</p>
+                    </div>
+                    <a href="{{ route('admin.events.create') }}" 
+                       class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                        Add New Event
+                    </a>
+                </div>
+            </div>
+
+            <!-- Events Table -->
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="p-6">
+                    @if($events->count() > 0)
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach($events as $event)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">{{ $event->title }}</div>
+                                            <div class="text-sm text-gray-500">{{ Str::limit($event->description, 50) }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {{ \Carbon\Carbon::parse($event->date)->format('M j, Y') }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $event->location }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="{{ route('admin.events.show', $event) }}" 
+                                               class="text-indigo-600 hover:text-indigo-900 mr-3">View</a>
+                                            <a href="{{ route('admin.events.edit', $event) }}" 
+                                               class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                            <form action="{{ route('admin.events.destroy', $event) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" 
+                                                        class="text-red-600 hover:text-red-900"
+                                                        onclick="return confirm('Are you sure you want to delete this event?')">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <div class="text-center py-8">
+                            <h3 class="text-lg font-medium text-gray-900">No events found</h3>
+                            <p class="text-gray-600">Get started by creating your first event.</p>
+                            <a href="{{ route('admin.events.create') }}" 
+                               class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                                Create First Event
                             </a>
-                            <form action="{{ route('admin.delete', $event->id) }}" method="POST" onsubmit="return confirm('Delete this event?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="px-3 py-1 bg-red-600 text-white rounded">
-                                    Delete
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="py-3 px-4 text-center text-gray-500">No events found</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
-
-</body>
-</html>
+</x-app-layout>
