@@ -9,7 +9,7 @@ Route::get('/', function () {
 
 // Route::middleware('auth')->group(function () {
     Route::middleware('check.role:admin')->prefix('admin')->group(function () {
-        Route::get('/dashboard', [EventController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/dashboard', [EventController::class, 'view'])->name('admin.dashboard');
         Route::get('/dashboard/create', [EventController::class, 'create'])->name('admin.create');
         Route::post('/dashboard/store', [EventController::class, 'store'])->name('admin.store');
         Route::put('/dashboard/events/{id}', [EventController::class, 'update'])->name('admin.edit');
