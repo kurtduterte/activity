@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [EventController::class, 'userDashboard'])->name('user.dashboard');
         Route::get('/dashboard/create', [EventController::class, 'userCreate'])->name('user.create');
         Route::post('/dashboard/store', [EventController::class, 'userStore'])->name('user.store');
+        Route::get('/events/{id}', [EventController::class, 'userEventDetails'])->name('user.details');
+        Route::get('/faqs', [EventController::class, 'userFaqs'])->name('user.faqs');
+        Route::get('/about', [EventController::class, 'userAbout'])->name('user.about');
     });
 
 });

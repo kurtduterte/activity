@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Event;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -22,7 +21,7 @@ class EventController extends Controller
     }
 
     public function store(Request $request) {
-        $validated = $request->validate([
+        $request->validate([
             'title'=> 'required|max:255',
             'description'=> 'required|max:255',
             'date'=> 'required',
@@ -77,7 +76,7 @@ class EventController extends Controller
     }
 
     public function userStore(Request $request) {
-        $validated = $request->validate([
+        $request->validate([
             'title'=> 'required|max:255',
             'description'=> 'required|max:255',
             'date'=> 'required',
@@ -93,5 +92,18 @@ class EventController extends Controller
         ]);
 
         return Redirect()->route('user.dashboard')->with('success', 'Event added successfully');
+    }
+
+    public function userEventDetails($id) {
+        $event = Event::findOrFail($id);
+        return view('user.details', compact('event'));
+    }
+
+    public function userFaqs() {
+        return view('user.faqs');
+    }
+
+    public function userAbout() {
+        return view('user.about');
     }
 }
