@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,7 +14,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/dashboard/store', [EventController::class, 'store'])->name('admin.store');
         Route::get('/dashboard/events/{id}/edit', [EventController::class, 'edit'])->name('admin.edit');
         Route::put('/dashboard/events/{id}', [EventController::class, 'update'])->name('admin.update');
-        Route::delete('/dashboard/events/{id}',[EventController::class, 'delete'])->name('admin.delete');
+        Route::get('/dashboard/events/{id}', [EventController::class, 'delete'])->name('admin.delete');
+        Route::get('/trash', [EventController::class, 'trash'])->name('admin.archived');
+        Route::get('/restore/{id}', [EventController::class, 'restore']);
+        Route::get('/delete/{id}', [EventController::class, 'destroy']);
     });
 
     Route::middleware('check.role:user')->group(function () {

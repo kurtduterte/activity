@@ -1,0 +1,6 @@
+[
+  {
+    "type": "sqlite",
+    "path": "/home/kurt/Projects/Laravel/activity/database/database.sqlite"
+  }
+]
