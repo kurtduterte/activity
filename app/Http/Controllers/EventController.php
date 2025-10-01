@@ -66,11 +66,25 @@ class EventController extends Controller
         return Redirect()->route('admin.dashboard')->with('success', 'Event deleted');
     }
 
-    public function trash(): View
+    public function trash()
     {
-        $event = Event::withTrashed()->get();
+        $events = Event::onlyTrashed()->get();
 
-        return Redirect()->route('admin.archived', compact('event'));
+        return view('admin.trash', compact('events'));
+    }
+
+    public function restore($id)
+    {
+        Event::withTrashed()->find($id)->restore();
+
+        return Redirect()->route('admin.archived')->with('success', 'Event restored successfully');
+    }
+
+    public function destroy($id)
+    {
+        Event::withTrashed()->find($id)->forceDelete();
+
+        return Redirect()->route('admin.archived')->with('success', 'Event deleted permanently');
     }
 
     public function userDashboard()
