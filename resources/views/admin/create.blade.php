@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Event</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 text-gray-800">
 
     <div class="max-w-lg mx-auto py-10">
@@ -15,7 +17,7 @@
             <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li>- {{ $error }}</li>
+                        <li> {{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
@@ -26,22 +28,26 @@
 
             <div class="mb-4">
                 <label for="title" class="block font-semibold mb-1">Title</label>
-                <input type="text" name="title" id="title" class="w-full border border-gray-300 rounded px-3 py-2" required>
+                <input type="text" name="title" id="title"
+                    class="w-full border border-gray-300 rounded px-3 py-2" required>
             </div>
 
             <div class="mb-4">
                 <label for="description" class="block font-semibold mb-1">Description</label>
-                <textarea name="description" id="description" class="w-full border border-gray-300 rounded px-3 py-2" rows="3" required></textarea>
+                <textarea name="description" id="description" class="w-full border border-gray-300 rounded px-3 py-2" rows="3"
+                    required></textarea>
             </div>
 
             <div class="mb-4">
                 <label for="location" class="block font-semibold mb-1">Location</label>
-                <input type="text" name="location" id="location" class="w-full border border-gray-300 rounded px-3 py-2" required>
+                <input type="text" name="location" id="location"
+                    class="w-full border border-gray-300 rounded px-3 py-2" required>
             </div>
 
             <div class="mb-4">
                 <label for="date" class="block font-semibold mb-1">Date</label>
-                <input type="date" name="date" id="date" class="w-full border border-gray-300 rounded px-3 py-2" required>
+                <input type="date" name="date" id="date"
+                    class="w-full border border-gray-300 rounded px-3 py-2" required>
             </div>
 
             <div class="flex justify-between">
@@ -52,4 +58,5 @@
     </div>
 
 </body>
+
 </html>

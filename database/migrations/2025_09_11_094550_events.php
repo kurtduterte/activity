@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('events', function(Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('description');
             $table->string('location');
             $table->date('date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
