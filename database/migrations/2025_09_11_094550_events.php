@@ -14,6 +14,7 @@ return new class extends Migration
         //
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('created_by');
             $table->string('title');
             $table->string('description');
             $table->string('location');

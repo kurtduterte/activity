@@ -17,8 +17,9 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => Str::random(10),
-            'description' => Str::random(15),
+            'created_by' => \App\Models\User::factory(),
+            'title' => fake()->sentence(3),
+            'description' => fake()->paragraph(),
             'location' => fake()->address(),
             'date' => fake()->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
         ];
