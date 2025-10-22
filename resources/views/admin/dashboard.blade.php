@@ -8,36 +8,36 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-  
+
   body {
     font-family: 'Inter', sans-serif;
   }
-  
+
   .glass-effect {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
-  
+
   .gradient-bg {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
-  
+
   .card-hover {
     transition: all 0.3s ease;
   }
-  
+
   .card-hover:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   }
-  
+
   .btn-hover {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
   }
-  
+
   .btn-hover::before {
     content: '';
     position: absolute;
@@ -48,24 +48,24 @@
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     transition: left 0.5s ease;
   }
-  
+
   .btn-hover:hover::before {
     left: 100%;
   }
-  
+
   .btn-hover:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   }
-  
+
   .animate-slide-up {
     animation: slideUp 0.6s ease-out;
   }
-  
+
   .animate-fade-in {
     animation: fadeIn 0.8s ease-out;
   }
-  
+
   @keyframes slideUp {
     from {
       opacity: 0;
@@ -76,7 +76,7 @@
       transform: translateY(0);
     }
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -85,29 +85,29 @@
       opacity: 1;
     }
   }
-  
+
   .stagger-1 { animation-delay: 0.1s; }
   .stagger-2 { animation-delay: 0.2s; }
   .stagger-3 { animation-delay: 0.3s; }
   .stagger-4 { animation-delay: 0.4s; }
-  
+
   .table-row-hover {
     transition: all 0.3s ease;
   }
-  
+
   .table-row-hover:hover {
     background: linear-gradient(90deg, rgba(102, 126, 234, 0.05), rgba(255, 255, 255, 0.05));
     transform: scale(1.02);
   }
-  
+
   .action-btn {
     transition: all 0.2s ease;
   }
-  
+
   .action-btn:hover {
     transform: scale(1.05);
   }
-  
+
   .empty-state {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   }
@@ -121,6 +121,13 @@
    <div class="absolute top-20 left-20 w-32 h-32 bg-white opacity-10 rounded-full"></div>
    <div class="absolute bottom-40 right-20 w-48 h-48 bg-white opacity-5 rounded-full"></div>
  </div>
+
+ @if (session('success'))
+
+ <div class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg z-50 animate-fade-in">
+   {{ session('success') }}
+ </div>
+ @endif
 
  <div class="relative z-10 max-w-7xl mx-auto py-12 px-6">
    <!-- Header Section -->
@@ -139,28 +146,37 @@
            </div>
          </div>
        </div>
-       
-       <a href="{{ route('admin.create') }}" class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 btn-hover animate-slide-up stagger-1">
-         <svg class="w-6 h-6 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-         </svg>
-         Add New Event
-       </a>
+
+       <div class="flex items-center space-x-4">
+         <a href="{{ route('admin.archived') }}" class="group inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 btn-hover animate-slide-up stagger-1">
+           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+           </svg>
+           View Trash
+         </a>
+
+         <a href="{{ route('admin.create') }}" class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 btn-hover animate-slide-up stagger-1">
+           <svg class="w-6 h-6 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+           </svg>
+           Add New Event
+         </a>
+       </div>
      </div>
    </div>
 
    <!-- Stats Cards (Optional - you can remove if not needed) -->
    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 animate-slide-up stagger-2">
      <div class="glass-effect rounded-2xl p-6 text-center">
-       <div class="text-3xl font-bold text-purple-600 mb-2">{{ count($events) }}</div>
+       <div class="text-3xl font-bold text-purple-600 mb-2">{{ $events->total() }}</div>
        <div class="text-gray-600 font-medium">Total Events</div>
      </div>
      <div class="glass-effect rounded-2xl p-6 text-center">
-       <div class="text-3xl font-bold text-emerald-600 mb-2">{{ count($events->where('date', '>=', date('Y-m-d'))) }}</div>
+       <div class="text-3xl font-bold text-emerald-600 mb-2">{{ $events->total() }}</div>
        <div class="text-gray-600 font-medium">Upcoming Events</div>
      </div>
      <div class="glass-effect rounded-2xl p-6 text-center">
-       <div class="text-3xl font-bold text-orange-600 mb-2">{{ count($events->where('date', '<', date('Y-m-d'))) }}</div>
+       <div class="text-3xl font-bold text-orange-600 mb-2">{{ $events->total() }}</div>
        <div class="text-gray-600 font-medium">Past Events</div>
      </div>
    </div>
@@ -201,6 +217,14 @@
                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                  </svg>
                  Date
+               </div>
+             </th>
+             <th class="py-6 px-8 text-left text-sm font-bold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+               <div class="flex items-center">
+                 <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                   <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                 </svg>
+                 Created By
                </div>
              </th>
              <th class="py-6 px-8 text-left text-sm font-bold text-gray-700 uppercase tracking-wider border-b border-gray-200">
@@ -248,26 +272,28 @@
                  </span>
                </div>
              </td>
+                <td class="py-6 px-8">
+                <div class="text-gray-700 font-medium">
+                    {{ $event->created_by }}
+                </div>
              <td class="py-6 px-8">
                <div class="flex items-center space-x-3">
-                 <a href="{{ route('admin.edit', $event->id) }}" 
+                 <a href="{{ route('admin.edit', $event->id) }}"
                     class="action-btn inline-flex items-center px-4 py-2 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-sm font-medium rounded-xl hover:from-amber-500 hover:to-orange-600 shadow-md hover:shadow-lg transition-all duration-200">
                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                    </svg>
                    Edit
                  </a>
-                 
-                 <form action="{{ route('admin.delete', $event->id) }}" method="POST" onsubmit="return confirm('Delete this event?')" class="inline">
-                   @csrf
-                   @method('DELETE')
-                   <button type="submit" class="action-btn inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white text-sm font-medium rounded-xl hover:from-red-600 hover:to-pink-700 shadow-md hover:shadow-lg transition-all duration-200">
+
+                 <a href="{{ url('/admin/dashboard/events/' . $event->id) }}" class="action-btn inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white text-sm font-medium rounded-xl hover:from-red-600 hover:to-pink-700 shadow-md hover:shadow-lg transition-all duration-200">
+                   <button onclick="return confirm('Delete this event?')"  class="action-btn inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white text-sm font-medium rounded-xl hover:from-red-600 hover:to-pink-700 shadow-md hover:shadow-lg transition-all duration-200">
                      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                      </svg>
-                     Delete
+                    Archive
                    </button>
-                 </form>
+                 </a>
                </div>
              </td>
            </tr>
@@ -296,6 +322,7 @@
            @endforelse
          </tbody>
        </table>
+       {{ $events->links() }}
      </div>
    </div>
  </div>

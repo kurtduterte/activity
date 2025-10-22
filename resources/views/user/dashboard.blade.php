@@ -61,7 +61,7 @@
   <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-lg border-b border-white/20">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex justify-between items-center h-20">
-        
+
         <!-- Logo -->
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
@@ -79,7 +79,7 @@
           <a href="{{ route('user.dashboard') }}" class="text-blue-600 font-medium">Events</a>
           <a href="{{ route('user.about') }}" class="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">About</a>
           <a href="{{ route('user.faqs') }}" class="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">FAQs</a>
-          <a href="{{ route('user.create') }}" 
+          <a href="{{ route('user.create') }}"
              class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
             <span class="flex items-center space-x-2">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +105,7 @@
         <a href="{{ route('user.dashboard') }}" class="block py-2 text-blue-600 font-medium">Events</a>
         <a href="{{ route('user.about') }}" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors font-medium">About</a>
         <a href="{{ route('user.faqs') }}" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors font-medium">FAQs</a>
-        <a href="{{ route('user.create') }}" 
+        <a href="{{ route('user.create') }}"
            class="block w-full text-center px-6 py-3 mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg">
           Register
         </a>
@@ -124,7 +124,7 @@
           Join exclusive events, connect with amazing people, and create unforgettable memories at Tomasino Gigs
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="{{ route('user.create') }}" 
+          <a href="{{ route('user.create') }}"
              class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
             <span class="flex items-center space-x-2">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,7 +148,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Background decoration -->
     <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <div class="w-96 h-96 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -157,7 +157,7 @@
 
   <!-- Main Content -->
   <div class="max-w-7xl mx-auto py-16 px-6">
-    
+
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-fade-in-up">
       <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300">
@@ -173,7 +173,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300">
         <div class="flex items-center space-x-4">
           <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
@@ -188,7 +188,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300">
         <div class="flex items-center space-x-4">
           <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
@@ -210,7 +210,7 @@
         <h2 class="text-3xl font-bold text-gray-900 mb-2">Available Events</h2>
         <p class="text-gray-600">Browse and register for upcoming events</p>
       </div>
-      <a href="{{ route('user.create') }}" 
+      <a href="{{ route('user.create') }}"
          class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
         <span class="flex items-center space-x-2">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -227,7 +227,7 @@
         @if($loop->first)
           <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         @endif
-        
+
         <div class="group bg-white/70 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg border border-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
           <!-- Event Header -->
           <a href="{{ route('user.details', $event->id) }}" class="block">
@@ -249,13 +249,13 @@
               </div>
             </div>
           </a>
-          
+
           <!-- Event Content -->
           <div class="p-6">
             <p class="text-gray-600 mb-4 leading-relaxed">
               {{ $event->description }}
             </p>
-            
+
             <div class="flex items-center space-x-2 text-gray-500 mb-6">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
@@ -263,7 +263,7 @@
               </svg>
               <span class="text-sm">{{ $event->location }}</span>
             </div>
-            
+
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-2">
                 @if(\Carbon\Carbon::parse($event->date)->isFuture())
@@ -299,7 +299,7 @@
             </div>
           </div>
         </div>
-        
+
         @if($loop->last)
           </div>
         @endif
@@ -316,7 +316,7 @@
             <p class="text-gray-600 mb-6 leading-relaxed">
               We're working hard to bring you amazing events. Check back soon for exciting opportunities!
             </p>
-            <a href="{{ route('user.create') }}" 
+            <a href="{{ route('user.create') }}"
                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-5a7.5 7.5 0 010-15h2.5"/>
@@ -326,6 +326,7 @@
           </div>
         </div>
       @endforelse
+      {{ $events->links() }}
     </div>
   </div>
 
@@ -365,7 +366,7 @@
             </a>
           </div>
         </div>
-        
+
         <div>
           <h4 class="font-semibold text-gray-900 mb-4">Quick Links</h4>
           <ul class="space-y-2">
@@ -375,7 +376,7 @@
             <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">FAQ</a></li>
           </ul>
         </div>
-        
+
         <div>
           <h4 class="font-semibold text-gray-900 mb-4">Support</h4>
           <ul class="space-y-2">
@@ -386,14 +387,14 @@
           </ul>
         </div>
       </div>
-      
+
       <div class="border-t border-gray-200 mt-8 pt-8 text-center">
         <p class="text-gray-600">&copy; 2025 Tomasino Gigs. All rights reserved. Built with ❤️ for the community.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Enhanced Script for mobile menu and animations -->
+
   <script>
     // Mobile menu toggle
     document.getElementById('menuBtn').addEventListener('click', () => {

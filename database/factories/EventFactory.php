@@ -19,7 +19,7 @@ class EventFactory extends Factory
         return [
             'created_by' => \App\Models\User::factory(),
             'title' => fake()->sentence(3),
-            'description' => fake()->paragraph(),
+            'description' => fake()->sentence(),
             'location' => fake()->address(),
             'date' => fake()->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
         ];

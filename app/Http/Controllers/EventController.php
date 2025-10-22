@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -12,7 +13,7 @@ class EventController extends Controller
 
     public function view()
     {
-        $events = Event::all();
+        $events = Event::paginate(15);
 
         return view('admin.dashboard', compact('events'));
     }
@@ -31,6 +32,7 @@ class EventController extends Controller
             'location' => 'required|min:5|max:255',
         ]);
 
+        $validated['created_by'] = Auth::id();
         Event::create($validated);
 
         return Redirect()->route('admin.dashboard')->with('success', 'Event added successfully');
@@ -38,14 +40,14 @@ class EventController extends Controller
 
     public function edit($id)
     {
-        $event = Event::findOrfail($id);
+        $event = Event::find($id);
 
         return view('admin.edit', compact('event'));
     }
 
     public function update(Request $request, $id)
     {
-        $event = Event::findOrFail($id);
+        $event = Event::find($id);
         $validated = $request->validate([
             'title' => 'required|min:5|max:255',
             'description' => 'required|min:5|max:255',
@@ -60,7 +62,7 @@ class EventController extends Controller
 
     public function delete($id)
     {
-        $event = Event::findOrFail($id);
+        $event = Event::find($id);
         $event->delete();
 
         return Redirect()->route('admin.dashboard')->with('success', 'Event deleted');
@@ -108,19 +110,20 @@ class EventController extends Controller
             'location' => 'required|min:5|max:255',
         ]);
 
-        Event::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'date' => $request->date,
-            'location' => $request->location,
-            'created_at' => Carbon::now(),
-        ]);
+
+
+        $image_gen = (uuid() . '.' . $request->file('image') . $file->getClientOriginalExtension());
+        $file = $request->file();
+
+        $extension = $file->getClientOriginalExtension();
+
+        Event::create($validated);
 
         return Redirect()->route('user.dashboard')->with('success', 'Event added successfully');
     }
 
     public function userEventDetails($id) {
-        $event = Event::findOrFail($id);
+        $event = Event::find($id);
         return view('user.details', compact('event'));
     }
 

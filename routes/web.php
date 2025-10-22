@@ -4,7 +4,23 @@ use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest.index');
+});
+
+Route::get('/about', function () {
+    return view('guest.about');
+});
+
+Route::get('/events', function () {
+    return view('guest.events');
+});
+
+Route::get('/gallery', function () {
+    return view('guest.gallery');
+});
+
+Route::get('/faq', function () {
+    return view('guest.faq');
 });
 
 Route::middleware('auth')->group(function () {
@@ -26,7 +42,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/dashboard/store', [EventController::class, 'userStore'])->name('user.store');
         Route::get('/events/{id}', [EventController::class, 'userEventDetails'])->name('user.details');
         Route::get('/faqs', [EventController::class, 'userFaqs'])->name('user.faqs');
-        Route::get('/about', [EventController::class, 'userAbout'])->name('user.about');
+        Route::get('/abouts', [EventController::class, 'userAbout'])->name('user.about');
     });
 
 });

@@ -15,20 +15,11 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (!$request->user()) {
-            return redirect('/login');
-        }
-
-        if ($request->user()->role !== $role) {
-            // Redirect to the correct dashboard based on their role
-            if ($request->user()->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            } elseif ($request->user()->role === 'user') {
-                return redirect()->route('user.dashboard');
-            }
-
-            return redirect('/');
-        }
+       if ($request->user() && $request->user()->role !== $role) {
+            return $request->user()->role === 'admin'
+                ? redirect()->route('admin.dashboard')
+                : redirect()->route('user.dashboard');
+       }
 
         return $next($request);
     }
