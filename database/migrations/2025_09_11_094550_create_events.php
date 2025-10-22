@@ -14,11 +14,12 @@ return new class extends Migration
         //
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->nullable();
             $table->string('title');
             $table->string('description');
             $table->string('location');
             $table->date('date');
+            $table->string('image_url');
             $table->softDeletes();
             $table->timestamps();
         });
